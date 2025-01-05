@@ -4,8 +4,12 @@ from spark_load import load_data
 
 def run_spark_etl():
     # S3에서 데이터 읽기
-    input_path = "s3a://commen-myaws-bucket/data/raw/concatenated.csv"
+    # input_path = "s3a://commen-myaws-bucket/data/raw/concatenated.csv"
+    # df = extract_data(input_path)
+
+    input_path = "data/raw/train.csv"
     df = extract_data(input_path)
+
 
     # 데이터 변환
     transformed_df = transform_data(df)

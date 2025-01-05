@@ -8,9 +8,11 @@ services:
       - ./app:/usr/src/app
     command: python spark_etl.py
     environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - REGION=${REGION}
+    - SPARK_HOME=/opt/spark
+    - HADOOP_CONF_DIR=/opt/spark/conf
+    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - REGION=${REGION}
     container_name: etl-container
     networks:
       - etl_network

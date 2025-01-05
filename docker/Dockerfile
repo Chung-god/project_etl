@@ -17,6 +17,13 @@ ENV PATH="$JAVA_HOME/bin:$PATH"
 # Spark 및 AWS 의존성 추가
 ENV SPARK_JARS_PACKAGES=org.apache.hadoop:hadoop-aws:3.3.2,com.amazonaws:aws-java-sdk-bundle:1.11.1026
 
+ENV SPARK_VERSION=3.3.2
+ENV HADOOP_VERSION=3.3.2
+
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-hadoop-cloud/${HADOOP_VERSION}/spark-hadoop-cloud-${HADOOP_VERSION}.jar -P $SPARK_HOME/jars/
+RUN wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.1026/aws-java-sdk-bundle-1.11.1026.jar -P $SPARK_HOME/jars/
+RUN wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/${HADOOP_VERSION}/hadoop-aws-${HADOOP_VERSION}.jar -P $SPARK_HOME/jars/
+
 # Python 의존성 설치
 COPY docker/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

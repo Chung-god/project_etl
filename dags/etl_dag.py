@@ -30,7 +30,7 @@ with DAG(
         executor_cores=2,
         executor_memory='2g',
         driver_memory='1g',
-        name='spark_etl_task',
+        name='spak_etl_task',
         verbose=True,
     )
 
