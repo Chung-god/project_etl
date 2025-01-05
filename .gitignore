@@ -12,3 +12,7 @@ data/raw/*.csv
 data/
 
 config/aws_credentials.env
+
+jars/
+
+jars_copy/
