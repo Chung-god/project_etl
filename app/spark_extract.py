@@ -16,8 +16,9 @@ def extract_data(input_path):
 
     # SparkSession 생성
     spark = SparkSession.builder \
-        .appName("Spark Extract") \
-        .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.2") \
+        .appName("ETL") \
+        .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.2,com.amazonaws:aws-java-sdk-bundle:1.11.1026") \
+        .config("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider") \
         .getOrCreate()
 
     # S3 접근 설정
@@ -28,7 +29,7 @@ def extract_data(input_path):
 
     # S3에서 데이터 읽기
     try:
-        df = spark.read.csv(input_path, header=True, inferSchema=True)
+        df = spark.read.csv(input_path, header=True, inferSchema=True).limit(1000)#적은양으로 테스트
         print("Data extracted successfully!")
         return df
     except Exception as e:

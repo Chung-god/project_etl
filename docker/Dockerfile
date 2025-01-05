@@ -14,6 +14,9 @@ RUN apt-get clean && apt-get update && apt-get install -y \
 ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
+# Spark 및 AWS 의존성 추가
+ENV SPARK_JARS_PACKAGES=org.apache.hadoop:hadoop-aws:3.3.2,com.amazonaws:aws-java-sdk-bundle:1.11.1026
+
 # Python 의존성 설치
 COPY docker/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
