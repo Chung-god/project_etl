@@ -8,4 +8,7 @@ awscliv2.zip
 aws
 
 data/raw/*.csv
+
+data/
+
 config/aws_credentials.env
