@@ -7,8 +7,5 @@ awscliv2.zip
 
 aws
 
-<<<<<<< HEAD
 data/raw/*.csv
-=======
-data/raw/*.csv
->>>>>>> 84cc9946940b6ccaad08b9dbe5bd369aa607ce70
+config/aws_credentials.env
