@@ -15,11 +15,14 @@ ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 # Python 의존성 설치
-COPY ./app/requirements.txt ./requirements.txt
+COPY docker/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# .env 파일 복사
+COPY config/aws_credentials.env .env
+
 # 모든 소스 코드 복사
-COPY ./app/ .  # 빌드 컨텍스트에서 app 폴더 복사
+COPY app/ .
 
 # 기본 실행 명령어
 CMD ["python", "spark_etl.py"]
