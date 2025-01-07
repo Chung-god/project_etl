@@ -17,4 +17,4 @@ jars/
 
 jars_copy/
 
-docker/aws_credentials.env
+docker/.env
