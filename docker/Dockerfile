@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 # 필요한 시스템 패키지 설치
 RUN apt-get clean && apt-get update && apt-get install -y \
     openjdk-17-jre-headless \
+    procps \
     wget \
     curl \
     && apt-get clean
@@ -26,12 +27,15 @@ RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SP
 ENV SPARK_HOME="/usr/local/spark"
 ENV PATH="$SPARK_HOME/bin:$PATH"
 
+# PostgreSQL JDBC 드라이버 추가
+RUN wget https://jdbc.postgresql.org/download/postgresql-42.5.4.jar -P $SPARK_HOME/jars/
+
 # Python 의존성 설치
 COPY docker/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY data/raw /usr/src/app/data/raw
-
+ 
 # .env 파일 복사
 COPY config/aws_credentials.env .env
 

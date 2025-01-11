@@ -6,7 +6,7 @@ def transform_data(df):
     
 
     #새로운 컬럼 추가
-    df = df.withColumn("IS_LNOG_PRODUCT", when(col("PRODUCT_LENGTH")>1000,1).otherwise(0))
+    df = df.withColumn("IS_LONG_PRODUCT", when(col("PRODUCT_LENGTH")>1000,1).otherwise(0))
     
     df = df.filter(col("PRODUCT_TYPE_ID") < 10000)
     

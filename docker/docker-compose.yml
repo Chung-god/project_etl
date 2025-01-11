@@ -7,15 +7,16 @@ services:
     # volumes:
     #   - ./app:/usr/src/app
     command: python spark_etl.py
-    env_file:
-      - ../config/aws_credentials.env
-
     environment:
-    - SPARK_HOME=/opt/spark
-    - HADOOP_CONF_DIR=/opt/spark/conf
+    - SPARK_HOME=/usr/local/spark
+    - HADOOP_CONF_DIR=/usr/local/spark/conf
     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - REGION=${REGION}
+    - POSTGRES_USER=etl_user
+    - POSTGRES_PASSWORD=etl_password
+    - POSTGRES_URL=jdbc:postgresql://postgres:5432/etl_db
+    - POSTGRES_TABLE=processed_data
     container_name: etl-container
     networks:
       - etl_network
@@ -58,11 +59,12 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
     ports:
       - "5432:5432"
+    volumes:
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - etl_network
 

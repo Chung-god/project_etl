@@ -7,7 +7,7 @@ def extract_data(input_path):
     데이터 추출 함수. 로컬 파일 또는 S3에서 데이터를 읽어 Spark DataFrame으로 반환.
     
     Parameters:
-        input_path (str): 데이터 파일 경로. 로컬 경로 또는 S3 경로(s3a://).
+        inESput_path (str): 데이터 파일 경로. 로컬 경로 또는 S3 경로(s3a://).
     
     Returns:
         pyspark.sql.DataFrame: 추출된 데이터 프레임.

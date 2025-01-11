@@ -17,7 +17,7 @@ with DAG(
     default_args=default_args,
     description='ETL Pipeline using Spark',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 1, 1),
+    start_date=datetime(2025, 1, 5),
     catchup=False,
 ) as dag:
 
