@@ -18,3 +18,5 @@ jars/
 jars_copy/
 
 docker/.env
+
+superset/
