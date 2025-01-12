@@ -48,10 +48,24 @@ services:
       - "8081:8080"
     environment:
       - LOAD_EXAMPLES=no
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
     volumes:
       - ./dags:/opt/airflow/dags
+    entrypoint: ""
+    command: ["webserver"]
     networks:
       - etl_network
+
+  airflow_scheduler:
+  image: apache/airflow:2.7.3
+  container_name: airflow_scheduler
+  depends_on:
+    - airflow
+  entrypoint: ""
+  command: ["scheduler"]
+  networks:
+    - etl_network
+
 
   postgres:
     image: postgres:latest
