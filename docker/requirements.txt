@@ -11,3 +11,6 @@ pandas==1.5.3  # 데이터 분석 라이브러리
 numpy==1.24.2  # 수치 계산 라이브러리
 
 tqdm==4.64.1  # 진행률 표시 라이브러리
+
+apache-airflow-providers-apache-spark
+apache-airflow-providers-openlineage>=1.8.0

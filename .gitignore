@@ -20,3 +20,5 @@ jars_copy/
 docker/.env
 
 superset/
+
+spark-3.3.2-bin-hadoop3.tgz
