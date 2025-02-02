@@ -43,7 +43,7 @@ services:
       - etl_network
 
   airflow-init:
-    image: apache/airflow:2.8.0
+    image: docker-etl
     container_name: airflow-init
     entrypoint: ["airflow", "db", "upgrade"]
     depends_on:
@@ -57,7 +57,7 @@ services:
       - etl_network
 
   airflow:
-    image: apache/airflow:2.8.0
+    image: docker-etl
     container_name: airflow
     ports:
       - "8081:8080"
@@ -75,7 +75,7 @@ services:
       - etl_network
 
   airflow-scheduler:
-    image: apache/airflow:2.8.0
+    image: docker-etl
     container_name: airflow-scheduler
     depends_on:
       - airflow

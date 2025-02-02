@@ -20,15 +20,18 @@ ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 # Airflow 설치를 위한 제약조건 파일을 복사 (Airflow 공식 문서 참조)
-# 제약조건 파일은 Airflow 버전에 맞게 준비해야 합니다.
+# 제약조건 파일은 Airflow 버전에 맞게 준비
 # 예를 들어, https://raw.githubusercontent.com/apache/airflow/constraints-2.8.0/constraints-3.9.txt 파일을 사용할 수 있습니다.
 COPY docker/constraints.txt ./constraints.txt
 
 # Apache Airflow 설치 (예: 버전 2.8.0) - constraints 파일을 사용하여 설치
-RUN pip install --no-cache-dir "apache-airflow==2.8.0" --constraint ./constraints.txt
+RUN pip install --no-cache-dir "apache-airflow==2.9.0" --constraint ./constraints.txt
 
 # Airflow Spark Provider 추가 설치
 RUN pip install --no-cache-dir apache-airflow-providers-apache-spark
+
+#psycopg2 : airflow가 postgerSQL데이터베이스 연결을 위해 설치
+RUN pip install --no-cache-dir psycopg2-binary
 
 # 추가 Python 의존성 설치 (requirements.txt에 다른 필요한 패키지 명시)
 COPY docker/requirements.txt ./requirements.txt
