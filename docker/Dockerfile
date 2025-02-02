@@ -53,6 +53,9 @@ ENV PATH="$SPARK_HOME/bin:$PATH"
 # PostgreSQL JDBC 드라이버 추가
 RUN wget https://jdbc.postgresql.org/download/postgresql-42.5.4.jar -P $SPARK_HOME/jars/
 
+
+COPY docker/airflow.cfg /root/airflow/airflow.cfg
+
 # 데이터 디렉토리 복사
 COPY data/raw /usr/src/app/data/raw
 

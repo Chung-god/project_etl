@@ -56,4 +56,4 @@ with DAG(
         )
 
     # 실행 순서 설정
-    spark_etl_tasks
+    spark_etl_pipeline = dag
