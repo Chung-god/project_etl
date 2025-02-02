@@ -43,16 +43,21 @@ services:
       - etl_network
 
   airflow-init:
-    image: apache/airflow:2.7.3
+    image: apache/airflow:2.8.0
     container_name: airflow-init
     entrypoint: ["airflow", "db", "upgrade"]
     depends_on:
       - postgres
+    environment:
+      - AIRFLOW__WEBSERVER__DEFAULT_USERNAME=admin
+      - AIRFLOW__WEBSERVER__DEFAULT_PASSWORD=admin
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://etl_user:etl_password@postgres:5432/etl_db
     networks:
       - etl_network
 
   airflow:
-    image: apache/airflow:2.7.3
+    image: apache/airflow:2.8.0
     container_name: airflow
     ports:
       - "8081:8080"
@@ -70,14 +75,16 @@ services:
       - etl_network
 
   airflow-scheduler:
-    image: apache/airflow:2.7.3
+    image: apache/airflow:2.8.0
     container_name: airflow-scheduler
     depends_on:
       - airflow
-      - postgres
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://etl_user:etl_password@postgres:5432/etl_db
+      - AIRFLOW__WEBSERVER__DEFAULT_USERNAME=admin
+      - AIRFLOW__WEBSERVER__DEFAULT_PASSWORD=admin
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://etl_user:etl_password@postgres:5432/etl_db
     volumes:
       - ./dags:/opt/airflow/dags
     command: "airflow scheduler"
@@ -125,6 +132,7 @@ services:
 
 networks:
   etl_network:
+    driver: bridge
 
 volumes:
   superset_home:
