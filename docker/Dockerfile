@@ -49,6 +49,7 @@ RUN tar -xzf /tmp/spark-${SPARK_VERSION}-bin-hadoop3.tgz && \
 # SPARK_HOME 및 PATH 설정
 ENV SPARK_HOME="/usr/local/spark"
 ENV PATH="$SPARK_HOME/bin:$PATH"
+ENV PYTHONPATH="/usr/src/app:${PYTHONPATH}"
 
 # PostgreSQL JDBC 드라이버 추가
 RUN wget https://jdbc.postgresql.org/download/postgresql-42.5.4.jar -P $SPARK_HOME/jars/
